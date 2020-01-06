@@ -7,13 +7,13 @@ import math
 max_speed = int(input())
 # max_speed = 90  # km/h
 light_count = int(input())
-print("max_speed, light_count = {} {}".format(
+print("max_speed, light_count = ({}, {})".format(
     max_speed, light_count), file=sys.stderr)
 tmp_speeds = [speed for speed in range(1, max_speed + 1)]
 
 for i in range(light_count):
     distance, duration = [int(j) for j in input().split()]
-    print("Feu {} : distance, duration = {} {}".format(
+    print("Light {} : distance, duration = ({}, {})".format(
           i, distance, duration), file=sys.stderr)
 
     for speed in list(tmp_speeds):
@@ -22,8 +22,10 @@ for i in range(light_count):
         timeToLight = distance / speedSec
         # print("speed, timeToLight = {}, {}".format(speed, timeToLight),
         #       file=sys.stderr)
-        if math.floor(timeToLight / duration) % 2 == 1:
+        if math.floor(round(timeToLight / duration, 10)) % 2 == 1:
             # print("remove speed = {}".format(speed), file=sys.stderr)
+            # if speed == 60:
+            #     print("THIS ONE IS A PB")
             tmp_speeds.pop(tmp_speeds.index(speed))
 
 print("tmp_speeds = {}".format(tmp_speeds), file=sys.stderr)
